@@ -1,4 +1,8 @@
 package com.jsol.mobileinfo.domain.maker.repository
 
-class MakerRepositoryCustomImpl {
+import com.querydsl.jpa.impl.JPAQueryFactory
+
+class MakerRepositoryCustomImpl(
+    private val queryFactory: JPAQueryFactory
+) : MakerRepositoryCustom {
 }
