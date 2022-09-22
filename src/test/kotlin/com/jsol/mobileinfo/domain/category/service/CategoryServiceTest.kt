@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-internal class CategoryServiceTest @Autowired constructor (
+class CategoryServiceTest @Autowired constructor (
     private val categoryService: CategoryService,
     private val categoryRepository: CategoryRepository,
 ) {
@@ -34,11 +34,12 @@ internal class CategoryServiceTest @Autowired constructor (
 
         // when
         categoryService.createCategory(request)
+        categoryService.createCategory(request2)
 
         // then
         val results = categoryRepository.findAll()
         println("results[0].type = ${results[0].type}")
-        assertThat(results).hasSize(1)
+        assertThat(results).hasSize(2)
         assertThat(results[0].name).isEqualTo(name)
         assertThat(results[1].name).isEqualTo("아웃")
     }
@@ -60,22 +61,30 @@ internal class CategoryServiceTest @Autowired constructor (
     @DisplayName("유형 전체 조회가 정상 동작한다.")
     fun getCategories() {
         // given
+        categoryRepository.saveAll(listOf(
+            Category("A", CategoryType.IN),
+            Category("B", CategoryType.OUT),
+        ))
+
+        // when
+        val categories = categoryService.getCategories()
+
+        // then
+        assertThat(categories).hasSize(2)
+        assertThat(categories).extracting("name").containsExactlyInAnyOrder("A", "B")
+        assertThat(categories).extracting("type").containsExactlyInAnyOrder(CategoryType.IN, CategoryType.OUT)
+    }
+
+    @Test
+    @DisplayName("유형 ")
+    fun updateCategory() {
+        // given
 
         // when
 
         // then
     }
 
-//    @Test
-//    @DisplayName
-//    fun updateCategory() {
-//        // given
-//
-//        // when
-//
-//        // then
-//    }
-//
 //    @Test
 //    @DisplayName
 //    fun deleteCategory() {

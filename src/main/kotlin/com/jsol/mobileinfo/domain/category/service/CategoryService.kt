@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(
-    @Autowired
     private val categoryRepository: CategoryRepository
 ) {
     private final val notFoundById = "id로 유형 조회에 실패했습니다."

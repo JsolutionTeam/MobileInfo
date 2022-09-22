@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController("/api/v1")
 class MakerController (
-    @Autowired
     private val makerService: MakerService
 ) {
 

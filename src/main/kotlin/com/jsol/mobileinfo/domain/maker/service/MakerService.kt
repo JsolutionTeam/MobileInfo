@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class MakerService (
-
-    @Autowired
     private val makerRepository: MakerRepository,
-
 ){
     private final val notFoundById = "id로 제조사 조회에 실패했습니다."
 

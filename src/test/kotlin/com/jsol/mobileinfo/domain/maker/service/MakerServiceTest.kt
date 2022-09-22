@@ -1,6 +1,7 @@
 package com.jsol.mobileinfo.domain.maker.service
 
 import com.jsol.mobileinfo.domain.maker.dto.request.MakerCreateRequest
+import com.jsol.mobileinfo.domain.maker.dto.request.MakerUpdateRequest
 import com.jsol.mobileinfo.domain.maker.entity.Maker
 import com.jsol.mobileinfo.domain.maker.repository.MakerRepository
 import org.assertj.core.api.Assertions.assertThat
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-internal class MakerServiceTest @Autowired constructor(
+class MakerServiceTest @Autowired constructor(
     private val makerRepository: MakerRepository,
     private val makerService: MakerService,
 ) {
@@ -67,6 +68,21 @@ internal class MakerServiceTest @Autowired constructor(
         // then
         assertThat(results).hasSize(2)
         assertThat(results).extracting("name").containsExactlyInAnyOrder("A", "B") // ["A", "B"]
+    }
+
+    @Test
+    @DisplayName("제조사 업데이트가 정상 동작한다.")
+    fun updateMakerTest(){
+        // given
+        val saveMaker = makerRepository.save(Maker("SM"))
+        val request = MakerUpdateRequest(saveMaker.id!!, "LG")
+
+        // when
+        makerService.updateMaker(request)
+
+        // then
+        val result = makerRepository.findAll()[0]
+        assertThat(result.name).isEqualTo("LG")
     }
 
     @Test
