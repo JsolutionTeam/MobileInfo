@@ -1,4 +1,4 @@
-package com.jsol.mobileinfo.domain.category.dto
+package com.jsol.mobileinfo.domain.category.dto.request
 
 import com.jsol.mobileinfo.domain.category.entity.CategoryType
 

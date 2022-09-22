@@ -4,12 +4,14 @@ import com.jsol.mobileinfo.domain.maker.dto.request.MakerCreateRequest
 import com.jsol.mobileinfo.domain.maker.dto.request.MakerUpdateRequest
 import com.jsol.mobileinfo.domain.maker.dto.response.MakerResponse
 import com.jsol.mobileinfo.domain.maker.service.MakerService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController("/api/v1")
-class MakerController(
+class MakerController (
+    @Autowired
     private val makerService: MakerService
 ) {
 

@@ -28,11 +28,21 @@ class Category(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 ){
-
     init {
         if (name.isBlank()) {
             throw IllegalArgumentException("이름은 비어 있을 수 없습니다")
         }
     }
+
+    fun updateName(name: String) {
+        this.name = name
+    }
+
+    fun updateType(type: CategoryType) {
+        this.type = type
+    }
+
+
+
 }
 
