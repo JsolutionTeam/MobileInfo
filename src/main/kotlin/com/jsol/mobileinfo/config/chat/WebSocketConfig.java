@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.chat;
+package com.jsol.mobileinfo.config.chat;
 
 
 import lombok.RequiredArgsConstructor;

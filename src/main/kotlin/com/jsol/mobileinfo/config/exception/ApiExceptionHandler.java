@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception;
+package com.jsol.mobileinfo.config.exception;
 
 import com.jsol.mcall.config.exception.storage.StorageException;
 import lombok.RequiredArgsConstructor;

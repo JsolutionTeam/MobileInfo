@@ -1,12 +1,12 @@
-package com.group.libraryapp.util
+package com.jsol.mobileinfo.domain.util
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.findByIdOrNull
 
-fun fail(): Nothing {
-  throw IllegalArgumentException()
+fun fail(msg: String): Nothing {
+  throw IllegalArgumentException(msg)
 }
 
-fun <T, ID> CrudRepository<T, ID>.findByIdOrThrow(id: ID): T {
-  return this.findByIdOrNull(id) ?: fail()
+fun <T, ID> CrudRepository<T, ID>.findByIdOrThrow(id: ID, msg: String = ""): T {
+  return this.findByIdOrNull(id) ?: fail(msg)
 }

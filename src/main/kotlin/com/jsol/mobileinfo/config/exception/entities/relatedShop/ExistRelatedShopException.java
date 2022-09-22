@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception.entities.relatedShop;
+package com.jsol.mobileinfo.config.exception.entities.relatedShop;
 
 import com.jsol.mcall.config.exception.BasicException;
 

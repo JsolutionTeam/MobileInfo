@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception;
+package com.jsol.mobileinfo.config.exception;
 
 public class BadRequestException extends BasicException {
     public BadRequestException() {

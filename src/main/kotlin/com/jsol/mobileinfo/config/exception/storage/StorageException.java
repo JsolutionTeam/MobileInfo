@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception.storage;
+package com.jsol.mobileinfo.config.exception.storage;
 import lombok.Getter;
 import lombok.Setter;
 

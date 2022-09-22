@@ -1,6 +1,4 @@
-package com.jsol.mcall.config.exception;
-
-import java.util.HashMap;
+package com.jsol.mobileinfo.config.exception;
 
 public class ExternalApiRequestException extends BasicException {
     public ExternalApiRequestException(String address, String message){

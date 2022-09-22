@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.utils;
+package com.jsol.mobileinfo.config.utils;
 
 import org.springframework.http.MediaType;
 

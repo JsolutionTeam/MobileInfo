@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception.entities.dealer;
+package com.jsol.mobileinfo.config.exception.entities.dealer;
 
 import com.jsol.mcall.config.exception.BasicException;
 

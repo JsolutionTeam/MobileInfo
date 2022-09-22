@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception.entities.jwt;
+package com.jsol.mobileinfo.config.exception.entities.jwt;
 
 import com.jsol.mcall.config.exception.BasicException;
 

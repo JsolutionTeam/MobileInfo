@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception.storage;
+package com.jsol.mobileinfo.config.exception.storage;
 
 public class StorageFileNotFoundException extends StorageException{
     private static final long serialVersionUID = 1L;

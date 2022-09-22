@@ -1,4 +1,4 @@
-package com.jsol.mcall.config.exception;
+package com.jsol.mobileinfo.config.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,1 +1,126 @@
+server:
+  port: 5005
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-response: true
+  tomcat:
+    accesslog:
+      directory: log
+      enabled: true
+      file-date-format: .yyyy-MM-dd
+      max-days: 14
+      pattern: '%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-Agent}i"' #combined
+      prefix: access
+      rotate: true
+      suffix: .log
+    basedir: ./logs
 
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    active: local
+    group:
+      "local": "localdb,common"
+      "dev": "edudb,common"
+      "prod": "proddb,common"
+
+logging:
+  pattern:
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    com.jsol.mcall: debug
+#    org.hibernate.SQL: debug
+#    org.hibernate.type: trace # ?? ??? ??? ?? ? ? ?? ?. ??, ?? ??. ??? ??? ??? ?? ??? ??.
+
+storage:
+  location:
+    files
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "proddb"
+  datasource:
+
+    url: jdbc:mariadb://14.45.108.75:3306/mobile_info?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&userSSL=false&zeroDateTimeBehavior=convertToNull&validationQuery="select 1"
+    username: mcallroot
+    password: jsolwpdlthffntus750!@
+    driver-class-name: org.mariadb.jdbc.Driver
+
+server:
+  port: 3100
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "edudb"
+  datasource:
+    url: jdbc:mariadb://14.45.108.75:3306/mobile_info?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&userSSL=false&zeroDateTimeBehavior=convertToNull&validationQuery="select 1"
+    username: mcallroot
+    password: jsolwpdlthffntus750!@
+    driver-class-name: org.mariadb.jdbc.Driver
+server:
+  port: 3101
+---
+spring:
+  config:
+    activate:
+      on-profile: "localdb"
+
+  datasource:
+    url: 'jdbc:h2:mem:mobile_info'
+    username: 'user'
+    password: ''
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  h2:
+    console:
+      enabled: true
+      path: '/h2-console'
+
+server:
+  port: 3100
+---
+jwt:
+  secret: asdfbjahdslfjh2edoiughdivjhsxlkjvcahxclksdfhieduwhgowieurhgoeirufhsdlfddjvkahlsxckvjhasdlkjvchlkj34htop23i4uythoiuerwjhgasdvdgouasyv987d6v987
+
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+  servlet:
+    multipart:
+      max-request-size: 10240KB #?? ?? ??? : 10MB
+      max-file-size: 10240KB #?? ?? ??? : 10MB
+
+
+
+  mvc:
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd HH:mm:ss
+      time: HH:mm:ss
+
+      properties:
+        hibernate:
+          #        show_sql: true # sout?? ????? ????. ?? ??? ???? ??.
+          format_sql: true
+  #        use_sql_comments: true # true -> jpql ? ? ??
+---
