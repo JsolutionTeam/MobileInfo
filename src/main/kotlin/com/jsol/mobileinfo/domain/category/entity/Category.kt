@@ -18,16 +18,18 @@ import javax.persistence.UniqueConstraint
     ],
 )
 class Category(
+    @Column(name="name")
     var name: String,
 
     @Enumerated(EnumType.STRING)
+    @Column(name="type", length = 10)
     var type: CategoryType,
 
     @Id
     @Column(name = "category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-){
+) {
     init {
         if (name.isBlank()) {
             throw IllegalArgumentException("이름은 비어 있을 수 없습니다")
@@ -42,7 +44,7 @@ class Category(
         this.type = type
     }
 
-
-
+    override fun toString(): String{
+        return "id=${this.id}, name=${this.name}, type=${this.type}"
+    }
 }
-

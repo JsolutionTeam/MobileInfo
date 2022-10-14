@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class MobileInfoApplication
 
 fun main(args: Array<String>) {
-	runApplication<MobileInfoApplication>(*args)
+    runApplication<MobileInfoApplication>(*args)
 }

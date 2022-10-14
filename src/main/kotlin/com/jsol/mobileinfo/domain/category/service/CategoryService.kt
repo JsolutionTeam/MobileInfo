@@ -6,19 +6,15 @@ import com.jsol.mobileinfo.domain.category.dto.response.CategoryResponse
 import com.jsol.mobileinfo.domain.category.entity.Category
 import com.jsol.mobileinfo.domain.category.repository.CategoryRepository
 import com.jsol.mobileinfo.domain.util.findByIdOrThrow
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CategoryService(
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
 ) {
-    private final val notFoundById = "id로 유형 조회에 실패했습니다."
-
-    @Transactional
-    fun createCategory(request: CategoryCreateRequest) {
-        categoryRepository.save(
+    fun createCategory(request: CategoryCreateRequest): Category {
+        return categoryRepository.save(
             Category(
                 name = request.name,
                 type = request.type,
@@ -27,31 +23,30 @@ class CategoryService(
     }
 
     @Transactional(readOnly = true)
-    fun getCategoryById(categoryId: Long): CategoryResponse{
-        val category = categoryRepository.findByIdOrThrow(categoryId, notFoundById)
+    fun getCategoryById(categoryId: Long): CategoryResponse {
+        val category = categoryRepository.findByIdOrThrow(categoryId)
         return CategoryResponse.of(category)
     }
 
     @Transactional(readOnly = true)
-    fun getCategories(): List<CategoryResponse>{
+    fun getCategories(): List<CategoryResponse> {
         return categoryRepository.findAll()
             .map(CategoryResponse::of)
     }
 
-    @Transactional
-    fun updateCategory(request: CategoryUpdateRequest){
-        val category = categoryRepository.findByIdOrThrow(request.categoryId, notFoundById)
-        if(request.name.isNotBlank()){
+    fun updateCategory(request: CategoryUpdateRequest): CategoryResponse {
+        val category = categoryRepository.findByIdOrThrow(request.categoryId)
+        if (request.name.isNotBlank()) {
             category.updateName(request.name)
         }
-        if(request.type != null){
+        if (request.type != null) {
             category.updateType(request.type)
         }
+        return CategoryResponse.of(category)
     }
 
-    @Transactional
-    fun deleteCategory(categoryId: Long){
-        val category = categoryRepository.findByIdOrThrow(categoryId, notFoundById)
+    fun deleteCategory(categoryId: Long) {
+        val category = categoryRepository.findByIdOrThrow(categoryId)
         categoryRepository.delete(category)
     }
 }

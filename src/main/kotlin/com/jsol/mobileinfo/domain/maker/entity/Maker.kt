@@ -1,22 +1,16 @@
 package com.jsol.mobileinfo.domain.maker.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
-import javax.persistence.UniqueConstraint
+import javax.persistence.*
 
 @Entity
 @Table(
-    name="tb_maker",
+    name = "tb_maker",
     uniqueConstraints = [
         UniqueConstraint(columnNames = ["name"], name = "tb_maker_name_uk")
     ]
 )
-
 class Maker(
+    @Column(name = "name")
     var name: String,
 
     @Id
@@ -31,7 +25,7 @@ class Maker(
         }
     }
 
-    fun updateName(name: String){
+    fun updateName(name: String) {
         this.name = name
     }
 }

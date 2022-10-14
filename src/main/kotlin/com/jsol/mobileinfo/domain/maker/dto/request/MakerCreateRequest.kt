@@ -1,5 +1,5 @@
 package com.jsol.mobileinfo.domain.maker.dto.request
 
-data class MakerCreateRequest(
-    val name: String,
+data class MakerCreateRequest constructor(
+    val name: String = "",
 )

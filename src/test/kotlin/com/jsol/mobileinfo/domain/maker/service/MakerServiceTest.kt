@@ -72,7 +72,7 @@ class MakerServiceTest @Autowired constructor(
 
     @Test
     @DisplayName("제조사 업데이트가 정상 동작한다.")
-    fun updateMakerTest(){
+    fun updateMakerTest() {
         // given
         val saveMaker = makerRepository.save(Maker("SM"))
         val request = MakerUpdateRequest(saveMaker.id!!, "LG")
@@ -87,7 +87,7 @@ class MakerServiceTest @Autowired constructor(
 
     @Test
     @DisplayName("제조사 삭제가 정상 동작한다.")
-    fun deleteMakerTest(){
+    fun deleteMakerTest() {
         // given
         val maker = makerRepository.save(Maker("SM"))
 

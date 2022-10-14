@@ -1,20 +1,19 @@
 package com.jsol.mobileinfo.domain.category.service
 
 import com.jsol.mobileinfo.domain.category.dto.request.CategoryCreateRequest
+import com.jsol.mobileinfo.domain.category.dto.request.CategoryUpdateRequest
 import com.jsol.mobileinfo.domain.category.entity.Category
 import com.jsol.mobileinfo.domain.category.entity.CategoryType
 import com.jsol.mobileinfo.domain.category.repository.CategoryRepository
-import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
-
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class CategoryServiceTest @Autowired constructor (
+class CategoryServiceTest @Autowired constructor(
     private val categoryService: CategoryService,
     private val categoryRepository: CategoryRepository,
 ) {
@@ -46,7 +45,7 @@ class CategoryServiceTest @Autowired constructor (
 
     @Test
     @DisplayName("유형 단일 조회가 정상 동작한다.")
-    fun getCategoryById() {
+    fun getCategoryByIdTest() {
         // given
         val category = categoryRepository.save(Category("이름", CategoryType.IN))
 
@@ -59,12 +58,14 @@ class CategoryServiceTest @Autowired constructor (
 
     @Test
     @DisplayName("유형 전체 조회가 정상 동작한다.")
-    fun getCategories() {
+    fun getCategoriesTest() {
         // given
-        categoryRepository.saveAll(listOf(
-            Category("A", CategoryType.IN),
-            Category("B", CategoryType.OUT),
-        ))
+        categoryRepository.saveAll(
+            listOf(
+                Category("A", CategoryType.IN),
+                Category("B", CategoryType.OUT),
+            )
+        )
 
         // when
         val categories = categoryService.getCategories()
@@ -76,22 +77,30 @@ class CategoryServiceTest @Autowired constructor (
     }
 
     @Test
-    @DisplayName("유형 ")
-    fun updateCategory() {
+    @DisplayName("유형 업데이트가 정상 동작한다.")
+    fun updateCategoryTest() {
         // given
+        val savedCategory = categoryRepository.save(Category("A", CategoryType.IN))
+        val request = CategoryUpdateRequest(savedCategory.id!!, "B", null)
 
         // when
+        categoryService.updateCategory(request)
 
         // then
+        val result = categoryRepository.findById(savedCategory.id!!)
+        assertThat(result.get().name).isEqualTo("B")
     }
 
-//    @Test
-//    @DisplayName
-//    fun deleteCategory() {
-//        // given
-//
-//        // when
-//
-//        // then
-//    }
+    @Test
+    @DisplayName("유형 삭제가 정상 동작한다")
+    fun deleteCategoryTest() {
+        // given
+        val savedCategory = categoryRepository.save(Category("A", CategoryType.OUT))
+
+        // when
+        categoryService.deleteCategory(categoryId = savedCategory.id!!)
+
+        // then
+        assertThat(categoryRepository.findAll()).isEmpty()
+    }
 }

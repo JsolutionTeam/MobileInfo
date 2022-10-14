@@ -18,4 +18,10 @@ data class CategoryResponse(
             )
         }
     }
+
+    override fun toString(): String {
+        return "id=${this.categoryId}, name=${this.name}, type=${this.type}"
+    }
+
+
 }
